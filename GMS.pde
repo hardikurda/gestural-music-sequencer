@@ -115,14 +115,14 @@ void setup() {
   // Internal / External Sync Radio Button
   midisync = controlP5.addRadio("radioSync",490,170+(18*d));
   midisync.deactivateAll(); // use deactiveAll to not make the first radio button active.
-  midisync.add("Internal Sync",55);
-  midisync.add("External Sync",56);
+  midisync.addItem("Internal Sync",55);
+  midisync.addItem("External Sync",56);
   
   // Sync / Ext Control Radio
   midiIn = controlP5.addRadio("radioMidiIn",604,50);
   // midisync.deactivateAll(); // use deactiveAll to not make the first radio button active.
-  midiIn.add("sync",78);
-  midiIn.add("ctrl",79);
+  midiIn.addItem("sync",78);
+  midiIn.addItem("ctrl",79);
 
   // Preset Radio Buttons
   presets = controlP5.addRadio("radioPresets",300,152,10,10,13);
@@ -250,7 +250,7 @@ void controlEvent(ControlEvent theEvent) {
       }
       //syncIn = RWMidi.getInputDevices()[MIDIInputDeviceID].createInput();
       syncIn =  RWMidi.getInputDevices()[MIDIInputDeviceID].createInput(pulses_per_quarter);
-      t11.setValue(RWMidi.getOutputDevices()[MIDIInputDeviceID]+" for "+inDeviceType);
+      t11.setValue(RWMidi.getInputDevices()[MIDIInputDeviceID]+" for "+inDeviceType);
     }
     // MIDI CTRL INPUT device selection
     if (theEvent.name().equals("MIDIinDevList") && inDeviceType == "ctrl") {
@@ -264,7 +264,7 @@ void controlEvent(ControlEvent theEvent) {
       ctrlIn.plug(this, "processProgramChange");
       ctrlIn.plug(this, "processTransposition");
       loadExternalControl();
-      t11.setValue(RWMidi.getOutputDevices()[MIDIInputDeviceID]+" for "+inDeviceType);
+      t11.setValue(RWMidi.getInputDevices()[MIDIInputDeviceID]+" for "+inDeviceType);
     }
     // camera selection
     if (theEvent.name().equals("CameraList")) { 
@@ -436,7 +436,8 @@ void savePresetsFile() {
   fd.setFile("*.gms");
   fd.setDirectory(".\\");
   // fd.setLocation(50, 50);
-  fd.show();
+  //fd.show();
+  fd.setVisible(true);
   String s = fd.getDirectory() + "/" + fd.getFile();
   if ( checkExtension(s,"gms")) {
     saveGMSSettings(s);
@@ -454,7 +455,8 @@ void loadPresetsFile() {
   fd.setFile("*.gms");
   fd.setDirectory(".\\");
   // fd.setLocation(50, 50);
-  fd.show();
+  //fd.show();
+  fd.setVisible(true);
   String s = fd.getDirectory() + "/" + fd.getFile();
   if ( checkExtension(s,"gms")) {
     loadGMSSettings(s);
@@ -471,7 +473,8 @@ void loadVideoFile() {
   fd.setFile("*.gms");
   fd.setDirectory(".\\");
   // fd.setLocation(50, 50);
-  fd.show();
+  //fd.show();
+  fd.setVisible(true);
   String s = fd.getDirectory() + "/" + fd.getFile();
   if ( checkExtension(s,"mov")) {
     video_loop = new Movie(this, s);

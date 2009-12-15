@@ -59,6 +59,21 @@ KEYBOARD CONTROLS:
 [delete]                                        = panic button (stop all notes on all channels)
 [!,@,#,$]                                       = filter video
 
+WINDOWS USERS:
+
+1. You must have Quicktime 7 installed.
+
+2. To use a video capture device with the GMS on windows, a Video Digitizer (VDIG) that is compatible with Quicktime must be installed. For details regarding why this is necessary check here:
+
+http://processing.org/reference/libraries/video/index.html
+
+There aren't many free Windows VDIG libraries out there, but the one I used in testing (WinVDIG) is free and came from here:
+
+http://www.eden.net.nz/7/20071008/
+
+Make sure you install version 1.0.1 according to the Processing recommendation, later versions are quite buggy. Other than that the GMS should work exactly as it does on the Mac, keeping in mind that it doesn't do much if you don't have a capture device installed.
+
+3. There are a few common problems on windows. If the GMS fails to start at all, its likely that Java or Quicktime are not installed. If you have an empty camera list its either because a) WinVDIG is not installed correctly or b) Your camera isn't supported by Quicktime. As of right now GMS will not work on a 64-bit Windows paltform. 
 
 OPEN ISSUES:
 1. 2009-05-09 Set directory for load / save to GMS parent folder
