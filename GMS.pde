@@ -644,11 +644,11 @@ void loadGMSSettings( String filename ) {
         tg_preset[pre][i-19] = boolean(value[2]);
       }
       // load ints
-      if ( i >  24 && i < 34 ) {
+      if ( i >  24 && i < 35 ) {
         int_preset[pre][i-25] = Integer.parseInt(value[2]);
       }
       ++i;
-      if (i > 34) {
+      if (i > 35) {
         i = 0;
         --ln;
       }
