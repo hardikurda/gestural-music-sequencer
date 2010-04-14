@@ -154,8 +154,12 @@ void playTheNote() {
     output.sendNoteOff(previous_midi_out, previous_note, 0);
     // choose the new note
     chooseTheNote();
-    // play new note
-    valid = output.sendNoteOn(midi_out, the_note, velocity);
+      
+    // Play the_note if rest probability less than random 1-100 otherwise it's a "rest"
+    if ( rest_prob < random(1,100) ) {
+      // play new note
+      valid = output.sendNoteOn(midi_out, the_note, velocity);
+    }
     // set previous note and midi channel
     previous_note = the_note;
     previous_midi_out = midi_out;
