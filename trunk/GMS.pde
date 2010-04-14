@@ -15,9 +15,9 @@
 // import necessary classes
 import java.awt.*;
 import processing.video.*;
-import rwmidi.*;
-import controlP5.*;
-import fullscreen.*;
+import rwmidi.*; // http://ruinwesen.com/support-files/rwmidi/documentation/RWMidi.html
+import controlP5.*; // http://www.sojamo.de/libraries/controlP5/
+import fullscreen.*; // http://www.superduper.org/processing/fullscreen_api/
 
 // GMS setup
 void setup() {
