@@ -12,12 +12,12 @@ MidiThread midi;
 FullScreen fs;
 SoftFullScreen sfs;
 
-Textlabel t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11;
+Textlabel t0,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12;
 // Textfield sf,lf,lvf;
 PImage logo;
 
 //// Global integer variables ////
-int sf_activity, lf_activity, pbX,pbY,transposition,previous_note,d,dot_prob = 0;
+int sf_activity, lf_activity, pbX,pbY,transposition,previous_note,d,dot_prob,rest_prob = 0;
 int note_rand,brightestX,brightestY,durPC = 0;
 int valid,noteValue,octave,scale_pos,velocity,the_note,MIDIDeviceID,MIDIInputDeviceID,c_preset,CameraList;
 int[] dur_weights = {50,50,50,50,50,50,50};
@@ -45,7 +45,7 @@ int[][] scales = { {  0, 3, 5, 7, 10 }, // Pentatonic
 // preset matrix for note probs and dur probs and booleans
 int[][] np_preset = new int[10][12];
 int[][] dp_preset = new int[10][7];
-int[][] int_preset = new int[10][20];
+int[][] int_preset = new int[10][21];
 boolean[][] tg_preset = new boolean[10][6];
 
 // Default scale is 0 (pentatonic), and dur_key is 2 (1/4 note)
@@ -77,7 +77,7 @@ boolean init_start = false;
 boolean filter_on[] = {false,false,false,false};
 
 //// Global String and char variables ////
-String gms_version = "v0.9";
+String gms_version = "v0.11";
 String dotted = "";
 String filter_names[] = {"GRAY","INVERT","POSTERIZE","THRESHOLD"};
 String filter_keys[] = {"!","@","#","$"};

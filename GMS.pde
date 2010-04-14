@@ -1,5 +1,6 @@
 /******************************************************
  * Title: GMS The Gestural Music Sequencer
+ * Version: 0.11 Beta
  * Author: John Keston
  * Web: http://audiocookbook.org
  * Email: keston@audiocookbook.org
@@ -96,6 +97,7 @@ void setup() {
 
   // HEADERS
   t9 = controlP5.addTextlabel("h5","DURATION PROBABILITIES: "+dur_prob_status,490,140);
+  t12 = controlP5.addTextlabel("h8","REST PROBABILITY:",490,302);
   t10 = controlP5.addTextlabel("h6","NOTE PROBABILITIES: "+note_prob_status,360,140);
   t1 = controlP5.addTextlabel("h7","PRESET ",290,140);
 
@@ -108,12 +110,15 @@ void setup() {
     controlP5.addSlider(abbr_note_dur[i],0,100,50,490,152+(18*i),100,14).setId(30+i);
     d = i;
   }
-  // Dot Slider
+  // Dot Slider (dot_prob)
   ++d;
   controlP5.addSlider("Dot",0,100,0,490,152+(18*d),100,14).setId(30+d);
+  
+  // Add the rest probability slider (rest_prob)
+  controlP5.addSlider("  ",0,100,0,490,188+(18*d),100,14).setId(83);
 
   // Internal / External Sync Radio Button
-  midisync = controlP5.addRadio("radioSync",490,170+(18*d));
+  midisync = controlP5.addRadio("radioSync",490,212+(18*d));
   midisync.deactivateAll(); // use deactiveAll to not make the first radio button active.
   midisync.addItem("Internal Sync",55);
   midisync.addItem("External Sync",56);
@@ -315,6 +320,11 @@ void controlEvent(ControlEvent theEvent) {
       dot_prob = (int)theEvent.controller().value();
       int_preset[c_preset][5] = dot_prob;
     }
+    // Set rest probability
+    if ( theEvent.controller().id() == 83 ) {
+      rest_prob = (int)theEvent.controller().value();
+      int_preset[c_preset][9] = rest_prob;
+    }
     // Set note randomness
     if ( theEvent.controller().id() == 50 ) {
       note_rand = (int)theEvent.controller().value();
@@ -494,10 +504,9 @@ void loadVideoFile() {
 }
 
 void radioPresets(int theID) {
-  //println("375: radioPresets");
   for(int i=61; i < 77; ++i) {
     if (theID == i) {
-      // println("Preset ID: "+theID);
+      println("Preset ID: "+theID);
       c_preset = theID-61;
       // reset note probs
       for(int p = 0; p < note_weights.length; ++p) {
@@ -540,6 +549,9 @@ void radioPresets(int theID) {
 
   dot_prob = int_preset[c_preset][5]; // Dotted Probability
   controlP5.controller("Dot").setValue(dot_prob);
+  
+  rest_prob = int_preset[c_preset][9]; // Rest Probability
+  controlP5.controller("  ").setValue(rest_prob);
 
   note_rand = int_preset[c_preset][6]; // Randomness
   controlP5.controller(" ").setValue(note_rand);
@@ -573,7 +585,7 @@ void setDefaultPresets() {
 void saveGMSSettings(String filename) {
   int ln = 0;
   String[] lines = new String[340];
-  for (int p = 0; p < 10; ++p) {
+  for (int p = 0; p < 11; ++p) {
     // save note weights
     for (int i = 0; i < note_weights.length; i++) {
       lines[ln] = ln + "\t" + p + "\t" + i + "\t" + np_preset[p][i];
@@ -601,6 +613,7 @@ void saveGMSSettings(String filename) {
     lines[++ln] = ln + "\t" + p + "\t" + int_preset[p][6]; // note_rand
     lines[++ln] = ln + "\t" + p + "\t" + int_preset[p][7]; // octave_min
     lines[++ln] = ln + "\t" + p + "\t" + int_preset[p][8]; // octave_max
+    lines[++ln] = ln + "\t" + p + "\t" + int_preset[p][9]; // rest_prob
     ++ln;
   }
   saveStrings(filename, lines);
@@ -641,7 +654,7 @@ void loadGMSSettings( String filename ) {
       }
     }
     // load preset 0 from the file into the UI controls
-    // lf.setValue(filename); /// THIS IS DOING WEIRD SHIT
+    // lf.setValue(filename); /// THIS WAS DOING WEIRD SHIT
     String pre = Integer.toString(0);
     presets.activate(pre);
     radioPresets(61);

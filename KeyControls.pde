@@ -70,14 +70,18 @@ void keyPressed() {
         t8.setValue("Current Scale: "+scale_names[scale_key]);
       }
     }
-    // Key controls for presets
+    // Key controls for presets TODO: FIX THIS!!!
     for (int i = 0; i < 10; ++i) {
       String x = Integer.toString(i);
       char num = x.charAt(0);
       if (key == num && keyEvent.isControlDown()) {
-//        println("preset: "+i);
+        // needed to activate the 10th radio
+        if (i==0) {
+          x="10";
+        }
+        //println("--------------------------------> preset: "+(i+61)+" activate: "+x);
         presets.activate(x);
-        radioPresets(i+61);
+        radioPresets(60+i);
       }
     }
     // turn on / off filters
