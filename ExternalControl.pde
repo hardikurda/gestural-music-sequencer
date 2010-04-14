@@ -5,7 +5,7 @@ String MidiChannelType;
 
 void loadExternalControl() {
   extCrtlXML = new XMLElement(this, "GMSMidiController.xml");
-  println("----------------------------------------------------> EXTCTRL XML Loaded");
+  // println("----------------------------------------------------> EXTCTRL XML Loaded");
 }
 
 void processTransposition(Note n) {
@@ -17,7 +17,7 @@ void processTransposition(Note n) {
 }
 
 void processProgramChange(ProgramChange p) {
-  println("-----------------------------> pc: "+p.getNumber());
+  // println("-----------------------------> pc: "+p.getNumber());
   if ( p.getNumber() < 10 ) {
     String pre = Integer.toString(p.getNumber()+1);
     presets.activate(pre);

@@ -446,7 +446,7 @@ void savePresetsFile() {
   fd.setFile("*.gms");
   fd.setDirectory(".\\");
   // fd.setLocation(50, 50);
-  //fd.show();
+  // fd.show();
   fd.setVisible(true);
   String s = fd.getDirectory() + "/" + fd.getFile();
   if ( checkExtension(s,"gms")) {
@@ -454,7 +454,7 @@ void savePresetsFile() {
     t11.setValue("Presets saved: "+fd.getFile());
   }
   else {
-//    println("bad filename");
+    // println("bad filename");
     t11.setValue("Not saved. Preset files must end with .gms");
   } 
 }
@@ -549,9 +549,6 @@ void radioPresets(int theID) {
 
   dot_prob = int_preset[c_preset][5]; // Dotted Probability
   controlP5.controller("Dot").setValue(dot_prob);
-  
-  rest_prob = int_preset[c_preset][9]; // Rest Probability
-  controlP5.controller("  ").setValue(rest_prob);
 
   note_rand = int_preset[c_preset][6]; // Randomness
   controlP5.controller(" ").setValue(note_rand);
@@ -561,6 +558,9 @@ void radioPresets(int theID) {
 
   octave_max = int_preset[c_preset][8]; // Octave range max
   controlP5.controller("octave_max").setValue(octave_max);
+  
+  rest_prob = int_preset[c_preset][9]; // Rest Probability
+  controlP5.controller("  ").setValue(rest_prob);
 
   // set note range based on octave min / max
   setNoteRange();
@@ -584,8 +584,8 @@ void setDefaultPresets() {
 
 void saveGMSSettings(String filename) {
   int ln = 0;
-  String[] lines = new String[340];
-  for (int p = 0; p < 11; ++p) {
+  String[] lines = new String[350];
+  for (int p = 0; p < 10; ++p) {
     // save note weights
     for (int i = 0; i < note_weights.length; i++) {
       lines[ln] = ln + "\t" + p + "\t" + i + "\t" + np_preset[p][i];
@@ -623,17 +623,17 @@ void saveGMSSettings(String filename) {
 void loadGMSSettings( String filename ) {
   String[] lines;
   lines = loadStrings( filename );
-  if (lines.length == 340) {
+  if (lines.length == 350) {
     int c = lines.length;
-    //println("c: "+c);
+    println("c: "+c);
     int p = 0;
     int i = 0;
     for( int ln=0; ln < c; ++ln ) {
-      //println("ln: "+ln);
+      println("ln: "+ln);
       String[] value = split(lines[ln], '\t');
       int pre = Integer.parseInt(value[1]);
       if ( i < 12 ) {
-        //println("v: "+value[2]+" pre: "+pre);
+        println("v: "+value[2]+" pre: "+pre);
         np_preset[pre][i] = Integer.parseInt(value[3]);
       }
       else if ( i > 11 && i  < 19 ) {
