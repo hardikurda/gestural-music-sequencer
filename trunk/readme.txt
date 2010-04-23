@@ -36,15 +36,12 @@ OS X universal binary java Midi subsystem).
 LICENSE:
 
 This software is licensed under the terms of the GNU General Public License as 
-published by the Free Software Foundation, version 3 or later. However, I have 
-not released the source yet so that I can clean things up a bit before other 
-developers get involved in the project. For now the release is limited a 
-compiled version of the application for Mac OS X only. The GMS Version 0.9 is 
-distributed "as is" from http://audiocookbook.org/gms/ in the hope that it will 
-be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of 
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public 
-License for more details. See http://www.gnu.org/licenses/ for a copy of the 
-license.
+published by the Free Software Foundation, version 3 or later.  The GMS Version 
+0.11 is distributed "as is" from http://audiocookbook.org/gms/ in the hope that 
+it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
+of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General 
+Public License for more details. See http://www.gnu.org/licenses/ for a copy of 
+the license.
 
 
 ACKNOWLEDGMENTS:
@@ -114,7 +111,7 @@ later versions are quite buggy. Other than that the GMS should work exactly as
 it does on the Mac, keeping in mind that it doesn't do much if you don't have 
 a capture device installed.
 
-3. There are a few common problems on windows. If the GMS fails to start at 
+3. There are a few common problems on Windows. If the GMS fails to start at 
 all, its likely that Java or Quicktime are not installed. If you have an empty 
 camera list its either because a) WinVDIG is not installed correctly or b) Your 
 camera isn't supported by Quicktime. As of right now GMS will not work on a 
